@@ -1,22 +1,24 @@
 <?php
 
+use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\EventoController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('evento.index');
+})->middleware('auth');
+
+//Para que solo este habilitado para usuarios logeados
+Route::group(['middleware' => ['auth']], function () {
+Route::get('agenda', [EventoController::class, 'index']);
+Route::post('agenda/mostrar', [EventoController::class, 'show']);
+Route::post('agenda/agregar', [EventoController::class, 'store']);
+Route::post('agenda/editar/{id}', [EventoController::class, 'edit']);
+Route::post('agenda/actualizar/{evento}', [EventoController::class, 'update']);
+Route::post('agenda/borrar/{id}', [EventoController::class, 'destroy']);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Auth::routes();
+
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');

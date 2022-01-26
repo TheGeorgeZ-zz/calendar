@@ -19,6 +19,19 @@
         @yield('title_postfix', config('adminlte.title_postfix', ''))
     </title>
 
+    {{-- Fullcalendar --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+
+    {{-- Others resources --}}
+    <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}"/>
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    <script type="text/javascript">
+        var baseURL = {!! json_encode(url('/')) !!}
+    </script>
+
     {{-- Custom stylesheets (pre AdminLTE) --}}
     @yield('adminlte_css_pre')
 
@@ -103,6 +116,7 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+    <script src="{{ asset('js/calendar.js') }}"></script>
 
 </body>
 
