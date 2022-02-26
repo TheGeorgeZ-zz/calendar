@@ -3,7 +3,7 @@
 _Clone the project wherever you want_
 
 ```
-git clone https://github.com/TheGeorgeZ/base-proyecto.git
+git clone https://github.com/TheGeorgeZ/calendar.git
 ```
 
 _Installation composer_
